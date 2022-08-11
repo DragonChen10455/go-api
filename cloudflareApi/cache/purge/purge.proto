@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package cloudflareApi.cache.purge;
+
+option go_package = "./cloudflareApi/cache/purge";
+option java_multiple_files = true;
+option java_package = "io.grpc.cloudflare.cache.purge";
+option java_outer_classname = "purgeProto";
+
+service PurgeCloudflare {
+  // Sends a greeting
+  rpc PurgeCloudflare (PurgeRequestCloudflare) returns (PurgeReplyCloudflare) {}
+}
+
+// The request message containing the user's name.
+
+message PurgeRequestCloudflare {
+  string apiKey = 1;
+  string apiEmail = 2;
+  string zoneName = 3;
+  repeated string purgeList = 4;
+}
+
+// The response message containing the greetings
+
+message PurgeReplyCloudflare {
+
+  bool result = 1;
+
+}
