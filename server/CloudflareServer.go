@@ -21,7 +21,7 @@ type server struct {
 func (s *server) PurgeCloudflare(ctx context.Context, in *pb.PurgeRequestCloudflare) (*pb.PurgeReplyCloudflare, error) {
 	log.Printf("apiKey Received: %v", in.GetApiKey())
 	log.Printf("apiEmail Received: %v", in.GetApiEmail())
-	log.Printf("zoneName Received: %v", in.GetZoneName())
+	log.Printf("zoneId Received: %v", in.GetZoneId())
 	log.Printf("purgeList Received: %v", in.GetPurgeList())
 
 	// Construct a new API object using a global API key
@@ -36,12 +36,7 @@ func (s *server) PurgeCloudflare(ctx context.Context, in *pb.PurgeRequestCloudfl
 	// Most API calls require a Context
 	ctxAPI := context.Background()
 
-	// Fetch the zone ID
-	id, err := api.ZoneIDByName(in.GetZoneName()) // Assuming example.com exists in your Cloudflare account already
-	if err != nil {
-		log.Fatal(err)
-		return &pb.PurgeReplyCloudflare{Result: false}, err
-	}
+	id := in.GetZoneId()
 	// set purgeRequest
 	fileList := in.GetPurgeList()
 
@@ -59,7 +54,7 @@ func (s *server) PurgeCloudflare(ctx context.Context, in *pb.PurgeRequestCloudfl
 func (s *server) PurgeCloudflareEverything(ctx context.Context, in *pb.PurgeRequestCloudflareEverything) (*pb.PurgeReplyCloudflare, error) {
 	log.Printf("apiKey Received: %v", in.GetApiKey())
 	log.Printf("apiEmail Received: %v", in.GetApiEmail())
-	log.Printf("zoneName Received: %v", in.GetZoneName())
+	log.Printf("zoneId Received: %v", in.GetZoneId())
 
 	// Construct a new API object using a global API key
 	api, err := cloudflare.New(in.GetApiKey(), in.GetApiEmail())
@@ -73,12 +68,7 @@ func (s *server) PurgeCloudflareEverything(ctx context.Context, in *pb.PurgeRequ
 	// Most API calls require a Context
 	ctxAPI := context.Background()
 
-	// Fetch the zone ID
-	id, err := api.ZoneIDByName(in.GetZoneName()) // Assuming example.com exists in your Cloudflare account already
-	if err != nil {
-		log.Fatal(err)
-		return &pb.PurgeReplyCloudflare{Result: false}, err
-	}
+	id := in.GetZoneId()
 	// set purgeRequest
 
 	response, err := api.PurgeEverything(ctxAPI, id)

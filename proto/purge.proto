@@ -18,14 +18,14 @@ service PurgeCloudflare {
 message PurgeRequestCloudflare {
   string apiKey = 1;
   string apiEmail = 2;
-  string zoneName = 3;
+  string zoneId = 3;
   repeated string purgeList = 4;
 }
 
 message PurgeRequestCloudflareEverything {
   string apiKey = 1;
   string apiEmail = 2;
-  string zoneName = 3;
+  string zoneId = 3;
 }
 
 // The response message containing the greetings
