@@ -19,6 +19,7 @@ type server struct {
 }
 
 func (s *server) PurgeCloudflare(ctx context.Context, in *pb.PurgeRequestCloudflare) (*pb.PurgeReplyCloudflare, error) {
+	log.Printf("purgeTask")
 	log.Printf("apiKey Received: %v", in.GetApiKey())
 	log.Printf("apiEmail Received: %v", in.GetApiEmail())
 	log.Printf("zoneId Received: %v", in.GetZoneId())
@@ -52,6 +53,7 @@ func (s *server) PurgeCloudflare(ctx context.Context, in *pb.PurgeRequestCloudfl
 }
 
 func (s *server) PurgeCloudflareEverything(ctx context.Context, in *pb.PurgeRequestCloudflareEverything) (*pb.PurgeReplyCloudflare, error) {
+	log.Printf("purgeEverythingTask")
 	log.Printf("apiKey Received: %v", in.GetApiKey())
 	log.Printf("apiEmail Received: %v", in.GetApiEmail())
 	log.Printf("zoneId Received: %v", in.GetZoneId())
